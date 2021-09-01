@@ -19,7 +19,8 @@ const messages = {
 function App() {
   //tarayıcının dilini buluyor.
   // localStoragede yoksa tarayıcının ana dilini kullan.
-  const defaultLocale = localStorage.getItem('locale') ? localStorage.getItem('locale') : navigator.language;
+  const isLocale = localStorage.getItem('locale')
+  const defaultLocale = isLocale ? isLocale : navigator.language;
 
   console.log(defaultLocale);
 
