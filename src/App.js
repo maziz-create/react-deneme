@@ -22,7 +22,7 @@ function App() {
   const isLocale = localStorage.getItem('locale')
   const defaultLocale = isLocale ? isLocale : navigator.language;
 
-  console.log(defaultLocale);
+  console.log("Default Browser Language => ", defaultLocale);
 
   const [locale, setLocale] = useState(defaultLocale);
 
@@ -40,7 +40,7 @@ function App() {
         <FormattedMessage id="title" />
 
         <p>
-          <FormattedMessage id="description" values={{count: 5}} />
+          <FormattedMessage id="description" values={{ count: 5 }} />
         </p>
 
         <br /><br />
