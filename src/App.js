@@ -1,9 +1,10 @@
 import { IntlProvider, FormattedMessage } from 'react-intl'
 import './App.css';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 // intl ' ın amacı çoklu dil desteği sağlamaktır.
 
+//farklı göstermek istediğimiz mesajlar
 const messages = {
   "tr-TR": {
     title: "Merhaba, Dünya!",
@@ -16,21 +17,34 @@ const messages = {
 }
 
 function App() {
-  const [lang, setLang] = useState("tr-TR");
+  //tarayıcının dilini buluyor.
+  // localStoragede yoksa tarayıcının ana dilini kullan.
+  const defaultLocale = localStorage.getItem('locale') ? localStorage.getItem('locale') : navigator.language;
+
+  console.log(defaultLocale);
+
+  const [locale, setLocale] = useState(defaultLocale);
+
+  useEffect(() => {
+    localStorage.setItem('locale', locale);
+  }, [locale]);
+
   return (
     <div className="App">
+      {/* Intl provider içerisinde formatted message'ın id kısmı ile gösterim yapılır. */}
       <IntlProvider
-        messages={messages[`${lang}`]}
+        messages={messages[`${locale}`]}
+        locale={locale}
       >
         <FormattedMessage id="title" />
 
         <p>
-          <FormattedMessage id="description"/>
+          <FormattedMessage id="description" />
         </p>
 
         <br /><br />
-        <button onClick={() => setLang("tr-TR")} style={{ marginRight: 5 }}>TR</button>
-        <button onClick={() => setLang("en-US")}>EN</button>
+        <button onClick={() => setLocale("tr-TR")} style={{ marginRight: 5 }}>TR</button>
+        <button onClick={() => setLocale("en-US")}>EN</button>
       </IntlProvider>
     </div>
   );
