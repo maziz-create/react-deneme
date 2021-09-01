@@ -22,7 +22,7 @@ function App() {
   const isLocale = localStorage.getItem('locale')
   const defaultLocale = isLocale ? isLocale : navigator.language;
 
-  console.log("Default Browser Language => ", defaultLocale);
+  console.log("Default Browser Language => ", navigator.language);
 
   const [locale, setLocale] = useState(defaultLocale);
 
